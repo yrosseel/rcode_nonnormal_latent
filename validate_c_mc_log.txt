@@ -1,0 +1,32 @@
+== validations (k = 5 Rasch, delta equally spaced [-2,2], a=0, b=1) ==
+  (1) score functions vs numDeriv: max abs diff 2.86e-08
+  (2) CML info vs numDeriv: max abs diff 1.05e-07 (max entry 0.148)
+  (3) E[Y|s] theta-invariance: max diff 8.88e-16 | sum_i a_i E[Y_i|s] = s: 1.78e-15
+  (4) basis invariance: c = 1.070467 vs 1.070467
+  (5) grid refinement: c = 1.070467 vs 1.070467
+  ALL VALIDATIONS PASSED
+
+== Rasch designs, delta equally spaced [-2,2], a = 0, b = 1 ==
+  k =  5: c = 1.0705  (size of nominal 5% test: 0.0582)  Itilde_l = 0.0604
+  k = 10: c = 1.0227  (size of nominal 5% test: 0.0526)  Itilde_l = 0.2141
+  k = 20: c = 1.0102  (size of nominal 5% test: 0.0512)  Itilde_l = 0.4828
+  k = 40: c = 1.0050  (size of nominal 5% test: 0.0506)  Itilde_l = 0.7940
+  k = 60: c = 1.0034  (size of nominal 5% test: 0.0504)  Itilde_l = 0.9596
+
+== S1 simulation design (k = 40 weighted, two groups) ==
+  c = 1.0652  (size of nominal 5% test: 0.0576)  Itilde_l = 0.8673
+
+== Application design (k = 60 weighted, replica items 1-60, gender) ==
+  c = 1.0586  (size of nominal 5% test: 0.0568)  Itilde_l = 1.0389
+
+DONE
+
+== (A) weighted-design exact checks (k=6, alpha=(1,2,1,3,1,2)) ==
+  (A1) weighted score functions vs numDeriv: max abs diff 9.47e-08
+  (A2) weighted CML info vs numDeriv: max abs diff 6.48e-11 (max entry 0.297)
+  (A) PASSED
+
+exact c: Rasch k=5 arm 1.0705 | weighted k=6 arm 1.4471
+MC arm rasch    (20000 reps ok, 1.8 min): mean LR plug-in 1.0716 (se 0.0109) [exact c 1.0705] | true-delta 0.9921 (se 0.0100) [expect 1]
+MC arm weighted (20000 reps ok, 6.5 min): mean LR plug-in 1.4364 (se 0.0144) [exact c 1.4471] | true-delta 0.9964 (se 0.0099) [expect 1]
+MC DONE

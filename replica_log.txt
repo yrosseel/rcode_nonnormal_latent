@@ -1,0 +1,64 @@
+[est] fitting M0 ...
+      logLik = -74123.63  (47.4s, converged: TRUE)
+[est] fitting M1 ...
+      logLik = -74072.83  (11.1s, converged: TRUE)
+[est] fitting M2 ...
+      logLik = -73607.63  (80.3s, converged: TRUE)
+[est] fitting M3 ...
+      logLik = -73596.18  (63.7s, converged: TRUE)
+[est] fitting M4 ...
+      logLik = -73578.40  (27.5s, converged: TRUE)
+[est] fitting M5 ...
+      logLik = -73565.78  (72.5s, converged: TRUE)
+[xval] fitting M0 ...
+      logLik = -72695.66  (138.2s, converged: TRUE)
+[xval] fitting M1 ...
+      logLik = -72644.90  (38.7s, converged: TRUE)
+[xval] fitting M2 ...
+      logLik = -72182.39  (274.3s, converged: TRUE)
+[xval] fitting M3 ...
+      logLik = -72171.85  (195.1s, converged: TRUE)
+[xval] fitting M4 ...
+      logLik = -72153.15  (90.7s, converged: TRUE)
+[xval] fitting M5 ...
+      logLik = -72141.65  (204.9s, converged: TRUE)
+
+===== block est =====
+deviance differences from M0:
+    M0     M1     M2     M3     M4     M5 
+   0.0  101.6 1032.0 1054.9 1090.5 1115.7 
+latent moments:
+    mean variance
+M0 0.928    1.088
+M1 0.927    1.088
+M2 0.922    1.078
+M3 0.926    1.074
+M4 0.921    1.080
+M5 0.920    1.088
+Pearson X2: M0 = 1416.5, M5 = 34.4
+M5 estimates:
+     beta0  beta1  lnb1    lnb2 lambda1 lambda2
+est 1.0082 0.0683 0.041 -0.0588 -0.2793 -0.1978
+se  0.0129 0.0176 0.009  0.0089  0.0115  0.0113
+M2 max |param corr|: 0.662 
+
+===== block xval =====
+deviance differences from M0:
+    M0     M1     M2     M3     M4     M5 
+   0.0  101.5 1026.6 1047.6 1085.0 1108.0 
+latent moments:
+    mean variance
+M0 0.926    1.087
+M1 0.926    1.087
+M2 0.921    1.079
+M3 0.925    1.075
+M4 0.922    1.078
+M5 0.922    1.080
+Pearson X2: M0 = 1401.1, M5 = 72.9
+M5 estimates:
+    beta0  beta1   lnb1    lnb2 lambda1 lambda2
+est 1.009 0.0647 0.0390 -0.0587 -0.2704 -0.1953
+se  0.013 0.0177 0.0089  0.0089  0.0110  0.0111
+M2 max |param corr|: 0.663 
+
+DONE
