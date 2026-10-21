@@ -5,7 +5,8 @@
 ## Fits M0-M5 on both item blocks; saves everything needed for the paper
 ## (deviance table, parameter tables, latent moments, predicted raw-score
 ## distributions, Pearson X2, parameter correlation matrix).
-## Run: Rscript replica_entreetoets.R      (writes replica_results.rds)
+## Run: Rscript replica_entreetoets.R      (writes replica_results.rds,
+##      entreetoets_fake.csv and entreetoets_fake_items.csv)
 ## --------------------------------------------------------------------------
 source(file.path(dirname(sub("--file=", "", grep("--file=", commandArgs(FALSE), value = TRUE))), "bcm.R"))
 
@@ -26,6 +27,22 @@ dat <- sim_bcm_data(n, alpha, delta, beta_t, b_t, lam_t, pgirl = 0.493,
                     seed = 20090115)
 X   <- rbind(c(1, 0), c(1, 1))
 wg  <- c(mean(dat$x1 == 0), mean(dat$x1 == 1))
+
+## ---- save the synthetic data set for distribution ------------------------
+## entreetoets_fake.csv: one row per simulated student -- id, girl (0/1),
+## the 120 item responses (items 1-60 = estimation block, 61-120 =
+## cross-validation block) and the generating latent value theta_true.
+## entreetoets_fake_items.csv: block, discrimination alpha and difficulty
+## delta of each item (treated as known in the fits).
+here <- dirname(sub("--file=", "", grep("--file=", commandArgs(FALSE), value = TRUE)))
+Yd <- as.data.frame(dat$Y); names(Yd) <- sprintf("i%03d", seq_len(2 * kblock))
+write.csv(data.frame(id = seq_len(n), girl = dat$x1, Yd,
+                     theta_true = round(dat$theta, 6)),
+          file.path(here, "entreetoets_fake.csv"), row.names = FALSE, quote = FALSE)
+write.csv(data.frame(item = sprintf("i%03d", seq_len(2 * kblock)),
+                     block = rep(c("estimation", "crossvalidation"), each = kblock),
+                     alpha = alpha, delta = round(delta, 6)),
+          file.path(here, "entreetoets_fake_items.csv"), row.names = FALSE, quote = FALSE)
 
 blocks <- list(est = 1:kblock, xval = kblock + 1:kblock)
 models <- c("M0", "M1", "M2", "M3", "M4", "M5")

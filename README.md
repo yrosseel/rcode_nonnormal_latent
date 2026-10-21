@@ -46,6 +46,7 @@ be checked without re-running the simulations.
 | file | written by |
 |---|---|
 | `replica_results.rds`, `replica_log.txt` | `replica_entreetoets.R` |
+| `entreetoets_fake.csv`, `entreetoets_fake_items.csv` | `replica_entreetoets.R` (the synthetic data set itself: 16,000 rows × id, girl, 120 item responses, generating `theta_true`; and the item parameters per block) |
 | `epil_results.rds` | `glmm_epilepsy.R` |
 | `compute_c_results.rds`, `validate_c_mc_log.txt` | `compute_c.R`, `validate_c_mc.R` |
 | `sim_S1S2.rds`, `sim_S1S2_summary.csv`, `sim_S1S2_log.txt` | `sim_S1S2.R` |
@@ -70,11 +71,15 @@ with the same settings regenerates the same data sets.
 
 ## Data
 
-- The Entreetoets data of the first application are proprietary to Cito and
-  are not included. `replica_entreetoets.R` simulates a data set with the
-  same design and known parameter values; the figures of the paper are
-  drawn from this replica. The numbers of the original analysis quoted in
-  the paper cannot be reproduced from this repository.
+- The Entreetoets data of the first application are proprietary to the Dutch
+  National Institute of Educational Measurement (Cito) and are not included.
+  `replica_entreetoets.R` simulates a data set with the same design and known
+  parameter values and saves it as `entreetoets_fake.csv` (one row per
+  simulated student: `id`, `girl`, items `i001`–`i120`, and the generating
+  latent value `theta_true`) with the item parameters in
+  `entreetoets_fake_items.csv`; the figures of the paper are drawn from this
+  replica. The numbers of the original analysis quoted in the paper cannot be
+  reproduced from this repository.
 - The epilepsy data are the data set `epil` in the R package `MASS`.
 
 ## License
