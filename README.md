@@ -69,6 +69,31 @@ With the defaults on 18 cores, `sim_S1S2.R` took about 40 minutes and
 `sim_S3.R` about 75 minutes. Seeds are fixed per replication, so a run
 with the same settings regenerates the same data sets.
 
+## Numerical integration: practical notes
+
+`fit_bcm()` integrates over the basic normal variable with a fixed Gauss–Hermite rule
+(`nq` nodes). Default node counts of other software (20–50) are **not** enough for this
+model: on the synthetic replica, model M5 with 48 nodes has the boys' scale and skewness off
+by 3.6 and 4.4 standard errors and the LR statistic against M0 off by 14%; 96 nodes still
+leave λ one SE short; 180 and 360 nodes agree to three decimals. The error oscillates in the
+number of nodes, so "add nodes until it stabilizes" is a weak check.
+
+Why: of a 99-point rule only 45 nodes carry weight above 1e-12 (spacing 0.32 at the centre,
+the rest beyond |z| ≈ 7), while the posterior of a unit is narrowest in the steep tail of the
+transformation (precision 1 + b²I(θ)e^{2λz}) and the information about λ sits in the tails.
+
+Recommended checks and alternatives:
+
+- Refit once with a rule of a *different type* and confirm the estimates do not move.
+- Uniform (trapezoid) grid on the z-scale: nodes `z = seq(-L, L, by = h)`, weights
+  `dnorm(z) * h` normalized to sum to one, with L = 8–10 and h = 0.05 (321–401 nodes).
+  The integrand is bounded by φ(z) for discrete data, so truncation at L = 8 costs < 1e-14;
+  for a posterior of SD s the relative error is of order exp(−2π²s²/h²). A drop-in
+  replacement for the Gauss–Hermite nodes/weights (see `make_grid_unif()` in
+  `compute_c.R`); the finite-mixture likelihood keeps the analytic gradient exact.
+- Adaptive Gauss–Hermite (as in `glmm_epilepsy.R`, 25 nodes) when unit-level information is
+  large, e.g. individual-level counts.
+
 ## Data
 
 - The Entreetoets data of the first application are proprietary to the Dutch
